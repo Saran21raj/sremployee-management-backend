@@ -24,24 +24,24 @@ async function loadApp()
         })
         app.use("/login",loginRoutes);
         
-        app.use((req,res,next)=>{
-            const token=req.headers["auth-token"];
-            if(token){
-                // res.send({msg:"token valid"})
-                try{
-                    const user=jwt.verify(token,process.env.JWT_SECRET_KEY);
-                    console.log(user);
-                    // res.send(user);
-                    next();
-                }
-                catch(err){
-                    res.send({msg:"Token not Valid"});
-                }
-            }
-            else{
-                res.sendStatus(401);
-            }
-        })
+        // app.use((req,res,next)=>{
+        //     const token=req.headers["auth-token"];
+        //     if(token){
+        //         // res.send({msg:"token valid"})
+        //         try{
+        //             const user=jwt.verify(token,process.env.JWT_SECRET_KEY);
+        //             console.log(user);
+        //             // res.send(user);
+        //             next();
+        //         }
+        //         catch(err){
+        //             res.send({msg:"Token not Valid"});
+        //         }
+        //     }
+        //     else{
+        //         res.sendStatus(401);
+        //     }
+        // })
         app.use("/admin",adminRoutes);
         app.use("/employee",employeeRoutes);
         app.listen(process.env.PORT,()=>console.log(`Server Started @ PORT ${process.env.PORT}`));
