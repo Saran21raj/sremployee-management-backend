@@ -1,6 +1,6 @@
 const db=require("../mongo");
 const jwt=require("jsonwebtoken");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 
 const JWT_KEY=process.env.JWT_SECRET_KEY;
 
