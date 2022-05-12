@@ -1,5 +1,5 @@
 const db=require("../mongo");
-const bcrypt=require("bcryptjs");
+const bcrypt=require("bcrypt");
 
 const services={
     async empaccountcreation(req,res)
