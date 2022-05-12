@@ -19,7 +19,7 @@ const services={
                 return res.status(403).send({error:"Email & Password Doesnt match"})
                 const token=jwt.sign({adminId: admin._id},JWT_KEY);
                 res.send({token});
-                console.log("SIGGNEDIN");
+                // console.log("SIGGNEDIN");
         }
         catch(err)
         {
