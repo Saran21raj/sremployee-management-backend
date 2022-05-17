@@ -9,6 +9,7 @@ const services={
                 const salt=await bcrypt.genSalt(10)
                 req.body.newPassword=await bcrypt.hash(req.body.newPassword,salt);
                 await db.employeeaccounts.findOneAndUpdate({ empId:req.body.employeeId}, { $set: { password: req.body.newPassword} });
+                res.send({msg:"password Updated"});
         }
         catch(err)
         {
