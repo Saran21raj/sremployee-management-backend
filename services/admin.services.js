@@ -21,7 +21,7 @@ const services={
                     //  inserting new data
                     const details={
                         name:req.body.name,
-                        username:req.body.userName,
+                        userName:req.body.userName,
                         password:req.body.password,
                     }
                     await db.admin.insertOne(details);
