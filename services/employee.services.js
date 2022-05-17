@@ -6,12 +6,12 @@ const services={
     async resetPassword(req,res){
         try
         {
-            const user=await db.employeeaccounts.findOne({username: req.body.userName});
+            const user=await db.employeeaccounts.findOne({empId:req.body.employeeId});
             if(user){
                 const salt=await bcrypt.genSalt(10)
                 req.body.newPassword=await bcrypt.hash(req.body.newPassword,salt);
-                await db.employeeaccounts.findOneAndUpdate({ userName:req.body.userName}, { $set: { password: req.body.newPassword} });
-                res.send({msg:"Passwords Changed"});
+                await db.employeeaccounts.findOneAndUpdate({ empId:req.body.employeeId}, { $set: { password: req.body.newPassword} });
+                res.send({msg:"Password Changed"});
             }
             else{
                 res.status(400).send();
