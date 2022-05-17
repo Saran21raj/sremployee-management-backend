@@ -2,6 +2,56 @@ const db=require("../mongo");
 const bcrypt=require("bcrypt");
 
 const services={
+    async adminaccountcreation(req,res)
+    {
+        try
+        {   //Request body validation
+            const count= await db.admin.count();
+            if(count<=3)
+            {
+                const user=await db.admin.findOne({username: req.body.userName});
+                if(user)
+                {
+                    return res.status(400).send({msg:"username already registered"});
+                }
+                else
+                {
+                    const salt=await bcrypt.genSalt(10)
+                    req.body.password=await bcrypt.hash(req.body.password,salt);
+                    //  inserting new data
+                    const details={
+                        name:req.body.name,
+                        username:req.body.userName,
+                        password:req.body.password,
+                    }
+                    await db.admin.insertOne(details);
+                    res.send({mes:"Admin Registered Successfully"})
+                }
+            }
+            else
+            {
+                res.status(400).send({msg:"admin count reached"})
+            }
+            
+        }
+        catch(err)
+        {
+            console.log("Error ",err);
+            res.sendStatus(500);
+        }
+    },
+    async adminlist(req,res){
+        try{
+            await db.admin.find({}).toArray(function(err, result) {
+                if (err) throw err;
+                res.send(result);
+              });
+        }
+        catch(err)
+        {
+            res.send(err);
+        }
+    },
     async empaccountcreation(req,res)
     {
         try

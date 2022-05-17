@@ -1,6 +1,8 @@
 const route=require("express").Router();
 
 const services=require("../services/admin.services")
+    route.post("/accountcreation",services.adminaccountcreation);
+    route.get("/adminlist",services.adminlist);
     route.post("/empaccountcreation",services.empaccountcreation);
     route.get("/employeelist",services.employeelist);
     route.get("/leaverequestlist",services.leaverequestlist);
