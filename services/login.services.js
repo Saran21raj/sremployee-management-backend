@@ -10,7 +10,7 @@ const services={
         try
         {
             // Checking wheather user exists or not
-            const admin=await db.admin.findOne({username: req.body.userName});
+            const admin=await db.admin.findOne({userName: req.body.userName});
             if(!admin){
                 return res.status(400).send({error:"User Doesn't Exits"});
             }
