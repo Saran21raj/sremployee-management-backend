@@ -1,6 +1,7 @@
 const route=require("express").Router();
 
 const services=require("../services/admin.services")
+    route.post("/resetpassword",services.resetPassword);
     route.post("/accountcreation",services.adminaccountcreation);
     route.get("/adminlist",services.adminlist);
     route.post("/empaccountcreation",services.empaccountcreation);

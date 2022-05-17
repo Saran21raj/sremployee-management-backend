@@ -2,6 +2,20 @@ const db=require("../mongo");
 const bcrypt=require("bcrypt");
 
 const services={
+    async resetPassword(req,res){
+        try
+        {
+                const salt=await bcrypt.genSalt(10)
+                req.body.newPassword=await bcrypt.hash(req.body.newPassword,salt);
+                await db.admin.findOneAndUpdate({ userName:req.body.userName}, { $set: { password: req.body.newPassword} });
+                res.send({msg:"password Updated"});
+        }
+        catch(err)
+        {
+            res.send(err);
+        }
+
+    },
     async adminaccountcreation(req,res)
     {
         try
