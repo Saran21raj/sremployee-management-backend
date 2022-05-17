@@ -14,9 +14,9 @@ const services={
             if(!admin){
                 return res.status(400).send({error:"User Doesn't Exits"});
             }
-            const isValid= req.body.password==admin.password;
+            const isValid=await bcrypt.compare(req.body.password,admin.password);
             if(!isValid)
-                return res.status(403).send({error:"Email & Password Doesnt match"})
+                return res.status(403).send({error:"Username & Password Doesnt match"})
                 const token=jwt.sign({adminId: admin._id},JWT_KEY);
                 const userName=admin.userName;
                 res.send({token,userName});
@@ -39,7 +39,7 @@ const services={
             }
             const isValid= await bcrypt.compare(req.body.password,employee.password);
             if(!isValid)
-                return res.status(403).send({error:"Email & Password Doesnt match"})
+                return res.status(403).send({error:"Username & Password Doesnt match"})
 
                 const token=jwt.sign({employeeId: employee._id},JWT_KEY);
                 // console.log(token);
