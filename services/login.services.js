@@ -19,7 +19,8 @@ const services={
                 return res.status(403).send({error:"Username & Password Doesnt match"})
                 const token=jwt.sign({adminId: admin._id},JWT_KEY);
                 const userName=admin.userName;
-                res.send({token,userName});
+                const name=admin.name;
+                res.send({token,userName,name});
                 // console.log("SIGGNEDIN");
         }
         catch(err)
